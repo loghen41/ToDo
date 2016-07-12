@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="App">
+<head>
+    <link href="../css/stylesheet.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <script src="../node_modules/angular/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.js"></script>
+
+    <title>To Do App</title>
+</head>
+<body >
+<div ng-controller='MainCtrl as main'>
+    <div id="toDoList" ng-repeat="list in main.toDoLists">
+        <list list="list" ng-click="main.changeView(list.name);"></list>
+        <div ng-show="main.view === list.name" ng-repeat="toDo in list.thingsToDo">
+            <to-do list="list" info="toDo"></to-do>
+        </div>
+        <form ng-show="main.view === list.name" ng-submit="main.addToDo(list.name, main.theToDo)">
+            <input ng-model="main.theToDo">
+            <button type="submit">Add To Do</button>
+        </form>
+
+    </div>
+    <form ng-submit="main.makeToDoList(main.theList)">
+        <input ng-model="main.theList">
+        <button type="submit">Make List</button>
+    </form>
+    <button ng-click="main.deleteAllCompleted()">Delete All Completed Lists</button>
+    <div>
+        <a  ui-sref="about">About</a>
+        <br/>
+        <a ui-sref='main'>Main</a>
+    </div>
+    <div ui-view>
+    </div>
+</div>
+<script src="../js/module.js"></script>
+<script src="../js/Services/main.js"></script>
+<script src="../js/Controllers/mainCtrl.js"></script>
+<script src="../js/Directives/list/list.js"></script>
+<script src="../js/Directives/toDo/toDo.js"></script>
+<script src="../js/Components/view-switcher/view-switcher.js"></script>
+<script src="../js/Components/about/about.js"></script>
+</body>
+</html>

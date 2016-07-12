@@ -1,0 +1,8 @@
+<span ng-bind="ctrl.list.name"></span>
+<a href="#" ng-click="ctrl.markCompleted(ctrl.list)"><img class="icon" src={{ctrl.list.completedIcon}}></a>
+<a href="#" ng-click="ctrl.delete(ctrl.list)"><img class="icon" src="../images/delete.png"></a>
+<a href="#" ng-click="ctrl.openEdit(ctrl.list)"><img class="icon" src="../images/edit.png"></a>
+<div ng-show="ctrl.editing === true">
+    <input  ng-model="ctrl.newName">
+    <button ng-click="ctrl.edit(ctrl.list, ctrl.newName)">Edit List</button>
+</div>
