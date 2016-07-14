@@ -8,10 +8,11 @@ app.controller('MainCtrl',  ['mainService', function ( mainService) {
 
     var vm = this;
     
-    vm.view = '';
+    vm.view = 'main';
     vm.toDoLists = {};
     vm.theToDo = '';
-
+    vm.deleting = false;
+    
     function getLists() {
         vm.toDoLists = mainService.getLists();
     }
@@ -32,6 +33,9 @@ app.controller('MainCtrl',  ['mainService', function ( mainService) {
         }
 
     };
+    vm.changeView = function (viewName) {
+        vm.view = mainService.updateView(viewName);
+    };
 
     vm.addToDo = function (listName, toDoToAdd) {
         
@@ -47,13 +51,13 @@ app.controller('MainCtrl',  ['mainService', function ( mainService) {
         }
     };
 
-    vm.changeView = function (viewName) {
-        vm.view = mainService.updateView(viewName);
-    };
+  
     
     vm.deleteAllCompleted = function() {
+        vm.deleting = true;
         response = mainService.deleteCompleted();
         vm.toDoLists = response;
+        vm.deleting = false;
     }
     
 }]);

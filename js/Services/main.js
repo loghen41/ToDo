@@ -4,7 +4,8 @@
     app.service('mainService', function () {
             var view = '';
             var toDoLists = {};
-
+            
+           
             function windowCheck() {
                 if (window.localStorage.getItem('storedList')) {
                     toDoLists = JSON.parse(window.localStorage.getItem('storedList'));
@@ -19,10 +20,11 @@
 
 
             // List Functionality
-            this.addList = function (toDo) {
-                if (toDoLists[toDo] === undefined) {
-                    toDoLists[toDo] = {
-                        name: toDo,
+            this.addList = function (list) {
+                if (toDoLists[list] === undefined) {
+                    toDoLists[list] = {
+                        originalName: list,
+                        name: list,
                         completed: false,
                         completedIcon: '../images/notComplete.png',
                         thingsToDo: {}
@@ -39,7 +41,7 @@
             };
 
             this.deleteList = function (list) {
-                delete toDoLists[list.name];
+                delete toDoLists[list.originalName];
                 window.localStorage.setItem('storedList', JSON.stringify(toDoLists));
                 return toDoLists;
             };
@@ -49,6 +51,7 @@
             this.addToDos = function (listName, toDoToAdd) {
                 if (toDoLists[listName].thingsToDo[toDoToAdd] === undefined) {
                     toDoLists[listName].thingsToDo[toDoToAdd] = {
+                        originalName: toDoToAdd,
                         toDo: toDoToAdd,
                         completed: false,
                         completedIcon: '../images/notComplete.png;'
@@ -63,7 +66,7 @@
             };
 
             this.deleteToDo = function (list, toDo) {
-                delete toDoLists[list.name].thingsToDo[toDo.toDo];
+                delete toDoLists[list].thingsToDo[toDo.originalName];
                 window.localStorage.setItem('storedList', JSON.stringify(toDoLists));
                 return toDoLists;
 

@@ -20,6 +20,7 @@
             var vm = this;
             vm.editing = false;
 
+           
             vm.openEdit = function() {
                 vm.editing = true;
             };

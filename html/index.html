@@ -9,30 +9,32 @@
 
     <title>To Do App</title>
 </head>
-<body >
-<div ng-controller='MainCtrl as main'>
-    <div id="toDoList" ng-repeat="list in main.toDoLists">
-        <list list="list" ng-click="main.changeView(list.name);"></list>
-        <div ng-show="main.view === list.name" ng-repeat="toDo in list.thingsToDo">
-            <to-do list="list" info="toDo"></to-do>
-        </div>
-        <form ng-show="main.view === list.name" ng-submit="main.addToDo(list.name, main.theToDo)">
-            <input ng-model="main.theToDo">
-            <button type="submit">Add To Do</button>
+<body>
+<div id='app' ng-controller='MainCtrl as main'>
+    <div>
+        <h1>To-Do App</h1>
+        <a ui-sref='main'>Main</a>
+        <a ui-sref="about">About</a>
+    </div>
+    <div ui-view>
+    </div>
+    <div id="mainView" ng-show="main.view === 'main'">
+        <a href='#' ng-click="main.deleteAllCompleted()"><img class="trashIcon" src="../images/trashCan.png"/></a>
+        <h2 ng-repeat="list in main.toDoLists" ng-click="main.changeView(list.originalName);">{{list.name}}</h2>
+        <form ng-submit="main.makeToDoList(main.theList)">
+            <input placeholder="List Name" ng-model="main.theList">
+            <button type="submit">Make List</button>
         </form>
 
     </div>
-    <form ng-submit="main.makeToDoList(main.theList)">
-        <input ng-model="main.theList">
-        <button type="submit">Make List</button>
-    </form>
-    <button ng-click="main.deleteAllCompleted()">Delete All Completed Lists</button>
-    <div>
-        <a  ui-sref="about">About</a>
-        <br/>
-        <a ui-sref='main'>Main</a>
-    </div>
-    <div ui-view>
+    <div id='toDoDiv' ng-show="main.view !== 'main'">
+        <list list="main.toDoLists[main.view]"></list>
+        <to-do ng-repeat="toDo in main.toDoLists[main.view].thingsToDo" list="main.view" info="toDo"></to-do>
+        <form ng-submit="main.addToDo(main.view, main.theToDo)">
+            <input ng-model="main.theToDo">
+            <button type="submit">Add To Do</button>
+        </form>
+        <button ng-click="main.changeView('main');">Back to Main</button>
     </div>
 </div>
 <script src="../js/module.js"></script>

@@ -1,4 +1,38 @@
+#app {
+    width: 70%;
+    margin-left: 15%;
+}
+
+#explosionDiv {
+    margin-top: -75px;
+}
+
+#explosionDiv img {
+    position: absolute;
+}
+
+
 .icon {
     max-width: .7em;
     max-height: .7em;
 }
+
+.trashIcon {
+    max-height: 2em;
+    max-width: 2em;
+    float: right;
+}
+list {
+    font-size: 2em;
+}
+
+.listBackground {
+    background: url('../images/notePad.png') no-repeat center center;
+    background-size: cover;
+}
+
+to-do {
+    font-size: 1em;
+}
+
+

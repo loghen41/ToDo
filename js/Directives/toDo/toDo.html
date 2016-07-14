@@ -1,9 +1,10 @@
-<span>{{toDo.info.toDo}}</span>
-<a href="#" ng-click="toDo.markCompleted(toDo.info)"><img class="icon" src={{toDo.info.completedIcon}}></a>
-<a href="#" ng-click="toDo.delete(toDo.list, toDo.info)"><img class="icon" src="../images/delete.png"/></a>
-<a href="#" ng-click="toDo.openEdit()"><img class="icon" src="../images/edit.png"/></a>
-<div ng-show="toDo.editing === true">
-<input  ng-model="toDo.newName">
-<button ng-click="toDo.edit(toDo.info, toDo.newName)">Edit To-Do</button>
+<div>
+    <span>{{toDo.info.toDo}}</span>
+    <a href="#" ng-click="toDo.markCompleted(toDo.info)"><img class="icon" src={{toDo.info.completedIcon}}></a>
+    <a href="#" ng-click="toDo.delete(toDo.list, toDo.info)"><img class="icon" src="../images/delete.png"/></a>
+    <a href="#" ng-click="toDo.openEdit()"><img class="icon" src="../images/edit.png"/></a>
+    <div ng-show="toDo.editing === true">
+        <input ng-model="toDo.newName">
+        <button ng-click="toDo.edit(toDo.info, toDo.newName)">Edit To-Do</button>
+    </div>
 </div>
-
